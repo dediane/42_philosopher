@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =	philosopher.c \
+SRCS =	philo.c \
 
 OBJS = ${SRCS:.c=.o}
 
-NAME = philosopher
+NAME = philo
 
-HEADER = philosopher.h
+HEADER = philo.h
 
 CC = clang
 
