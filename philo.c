@@ -6,50 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 23:24:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/14 19:22:47 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/14 20:57:34 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 //pthread_mutex_t mutex;
-
-static int	ft_checkcount(int j)
-{
-	if (j == 1)
-		return (-1);
-	else
-		return (0);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	j;
-	int	nb;
-	int	count;
-
-	i = 0;
-	j = 1;
-	nb = 0;
-	count = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			j = j * -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i++] - 48);
-		count++;
-	}
-	if (count > 10)
-		return (ft_checkcount(j));
-	return (nb * j);
-}
 
 void	*routine()
 {
@@ -80,6 +43,21 @@ long	get_timestamp(long start_ts)
 		current = get_timestamp(0);
 	}
 }*/
+
+t_philo	init_thread(int nb)
+{
+	t_philo *philo;
+	int i;
+	
+	i = 0;
+	while (i < nb)
+	{
+		philo = malloc(sizeof(t_philo));
+		philo->id = i + 1;
+		
+		
+	}
+}
 
 int	main(int ac, char **av)
 {
