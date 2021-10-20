@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/20 19:16:17 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/20 19:42:29 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_fill_my_philos(t_philo *ph, t_env *var, int nb)
 	i = -1;
 	while(++i < nb)
 	{
-		(void)(ph);
 		ph->id = i + 1;
 		pthread_create(&(ph[i].philo), NULL, &routine, NULL);
 		pthread_mutex_init(&(ph[i].fork), NULL);

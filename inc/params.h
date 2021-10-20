@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/20 19:15:10 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/20 19:43:09 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ typedef struct s_env
 	long	t_to_die;
 	long	t_to_eat;
 	long	t_to_sleep;
-	long	t_need_eat;
 }		t_env;
