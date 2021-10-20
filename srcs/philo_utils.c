@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 20:48:53 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/14 20:50:50 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/15 12:21:35 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,26 @@ int	ft_atoi(const char *str)
 	if (count > 10)
 		return (ft_checkcount(j));
 	return (nb * j);
+}
+
+long	get_timestamp(long start_time)
+{
+	struct timeval    time;
+
+	gettimeofday(&time, NULL);
+	return (((time.tv_sec * 1000) + time.tv_usec / 1000) - start_time);
+}
+
+void ft_usleep(int duration)
+{
+	long start;
+	long current;
+
+	start = get_timestamp(0);
+	current = start;
+	while (duration > current - start)
+	{
+		usleep(100);
+		current = get_timestamp(0);
+	}
 }

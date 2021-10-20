@@ -6,13 +6,13 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 23:02:52 by ddecourt          #+#    #+#              #
-#    Updated: 2021/10/14 20:51:27 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/10/15 14:30:43 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	philo.c \
 		srcs/parsing.c \
-		srcs/philo_utlis.c \
+		srcs/philo_utils.c \
 
 OBJS = ${SRCS:.c=.o}
 
