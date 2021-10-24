@@ -27,6 +27,8 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 	i = -1;
 	while (++i < nb)
 	{
+		env->nb_philo = nb;
+		next_fork = NULL;
 		ph->id = i + 1;
 		if (&(ph[i].fork) == NULL && i != (env->nb_philo - 1))
 		{
@@ -44,15 +46,28 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 
 int	main(int ac, char **av)
 {
-	t_philo	*ph;
+	//t_philo	*ph;
 	t_env	env;
-	int		nb_of_philo;
+	//int		nb_of_philo;
 
+	if (ft_check_ac(ac) == 1)
+		return(EXIT_FAILURE);
+	if (ft_parsing(av, &env) == 1)
+		return(EXIT_FAILURE);
+	printf("Parsing successful\n");
+}
+	/*if (ac != 5 && ac != 6)
+	{
+		printf("Usage: ./philo number_of_philosopher time_to_die time_to_eat\
+		time_to_sleep [number_of_times_each_philosopher_must_eat]");
+		return (1);
+	}
+	if (ft_parsing(av, &env) == 1)
+		return (1);
 	nb_of_philo = ft_atoi(av[1]);
 	ph = malloc(sizeof(t_philo) * (nb_of_philo + 1));
+	printf("ICI\n");
 	if (!ph)
-		return ((int)NULL);
-	ft_parsing(ac, av, &env);
+		return (0);
 	init_my_philos(ph, &env, nb_of_philo);
-	return (0);
-}
+	return (0);*/

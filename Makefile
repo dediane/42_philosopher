@@ -22,7 +22,7 @@ HEADER = philo.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra -pthread
+CFLAGS = -Wall -Werror -Wextra -pthread -fsanitize=address -g3
 RM = rm -f
 
 .c.o:

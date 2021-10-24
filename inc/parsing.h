@@ -13,6 +13,8 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-int	ft_parsing(int ac, char **av, t_env *var);
+int	ft_parsing(char **av, t_env *var);
+int	is_numeric(char **av, int i, int j);
+int ft_check_ac(int ac);
 
 #endif
