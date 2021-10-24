@@ -16,9 +16,9 @@
 typedef struct s_philo
 {
 	pthread_t		philo;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	*next_fork;
-	pthread_mutex_t	*mutex_write;
+	pthread_mutex_t	fork;
+	pthread_mutex_t	next_fork;
+	pthread_mutex_t	mutex_write;
 	unsigned int	id;
 	long			init_time;
 	long			t_wait;
