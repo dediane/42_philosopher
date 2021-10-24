@@ -50,7 +50,6 @@ int	main(int ac, char **av)
 	ph = malloc(sizeof(t_philo) * (nb_of_philo + 1));
 	if (!ph)
 		return (0);
-	ph = NULL;
 	init_my_philos(ph, &env, nb_of_philo);
 	printf("Parsing successful\n");
 }
