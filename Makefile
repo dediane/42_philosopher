@@ -6,19 +6,20 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 23:02:52 by ddecourt          #+#    #+#              #
-#    Updated: 2021/10/15 14:30:43 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/10/26 01:17:07 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =	philo.c \
+SRCS =	srcs/philo.c \
 		srcs/parsing.c \
 		srcs/philo_utils.c \
+		srcs/routine.c \
 
 OBJS = ${SRCS:.c=.o}
 
 NAME = philo
 
-HEADER = philo.h
+HEADER = inc/philo.h
 
 CC = clang
 

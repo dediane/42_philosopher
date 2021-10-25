@@ -6,33 +6,44 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/23 22:29:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 01:44:43 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
-void	*routine(void *ph)
+void	*routine(void *arg)
 {
-	pthread_mutex_lock(ph);
-	pthread_mutex_unlock(ph);
+	t_philo	*ph;
+
+	ph = (t_philo *)(arg);
+	pthread_mutex_lock(&ph->mutex_write);
+	printf("here\n");
+	pthread_mutex_unlock(&ph->mutex_write);
+	exec_routine(ph);
 	return (0);
 }
 
 void	init_my_philos(t_philo *ph, t_env *env, int nb)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	env->nb_philo = nb;
-	while(++i < (nb - 1))
+	while (++i < (nb - 1))
 	{
 		ph[i].id = i + 1;
+		pthread_create(&ph[i].philo, NULL, &routine, &ph[i]);
+		pthread_mutex_init(&ph[i].fork, NULL);
+		pthread_mutex_init(&ph[i].mutex_write, NULL);
 		ph[i].next_fork = ph[i + 1].fork;
 		ph[i].init_time = 0;
 		ph[i].t_wait = 0;
 	}
 	ph[nb - 1].id = nb;
+	pthread_create(&ph[nb - 1].philo, NULL, &routine, &ph[nb - 1]);
+	pthread_mutex_init(&ph[nb - 1].fork, NULL);
+	pthread_mutex_init(&ph[nb - 1].mutex_write, NULL);
 	ph[nb - 1].next_fork = ph[0].fork;
 }
 
@@ -43,9 +54,9 @@ int	main(int ac, char **av)
 	int		nb_of_philo;
 
 	if (ft_check_ac(ac) == 1)
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	if (ft_parsing(av, &env) == 1)
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	nb_of_philo = ft_atoi(av[1]);
 	ph = malloc(sizeof(t_philo) * (nb_of_philo + 1));
 	if (!ph)

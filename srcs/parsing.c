@@ -6,11 +6,11 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:51:13 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/22 16:05:56 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:31:08 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../inc/philo.h"
 
 int	is_numeric(char **av, int i, int j)
 {
