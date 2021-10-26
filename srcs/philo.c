@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 16:36:53 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:25:44 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	*routine(void *arg)
 	ph = (t_philo *)(arg);
 	if (ph->id % 2 == 0)
 		exec_routine(ph);
-
 	return (0);
 }
 
@@ -39,7 +38,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 		ph[i].t_wait = 0;
 		if (i == nb - 1)
 			ph[i].next_fork = ph[0].fork;
-		else	
+		else
 			ph[i].next_fork = ph[i + 1].fork;
 	}
 }

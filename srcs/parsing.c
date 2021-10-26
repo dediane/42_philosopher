@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:51:13 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 16:24:31 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:25:04 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_numeric(char **av, int i, int j)
 	return (1);
 }
 
-int ft_check_ac(int ac)
+int	ft_check_ac(int ac)
 {
 	if (ac != 5 && ac != 6)
 	{
@@ -49,8 +49,9 @@ int	ft_parsing(char **av, t_env *env)
 	env->t_to_sleep = ft_atoi(av[4]);
 	env->start_time = get_timestamp(0);
 	printf("Time = %ld\n", env->start_time);
-	if (env->nb_philo <= 0 || env->t_to_die <= 0 || env->t_to_eat <= 0 || env->t_to_sleep <= 0)
-		return(1); 
+	if (env->nb_philo <= 0 || env->t_to_die <= 0 || env->t_to_eat <= 0 \
+	|| env->t_to_sleep <= 0)
+		return (1);
 	if (av[5] != NULL)
 		env->nb_time_eat = ft_atoi(av[5]);
 	return (0);

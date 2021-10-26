@@ -6,19 +6,19 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 15:35:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:23:54 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
-#define PHILO_H
+# define PHILO_H
 
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <pthread.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
 
 //struct
 typedef struct s_env
@@ -47,11 +47,13 @@ int		ft_atoi(const char *str);
 long	get_timestamp(long start_time);
 void	ft_usleep(int duration);
 void	ft_print_status(t_philo *ph, char *s);
+void	ft_free_my_philos(t_philo *ph, int nb);
 //parsing
 int		ft_parsing(char **av, t_env *var);
 int		is_numeric(char **av, int i, int j);
 int		ft_check_ac(int ac);
 //routine
 void	exec_routine(t_philo *ph);
+void	destroy_mutex(t_philo *ph, int nb);
 
 #endif

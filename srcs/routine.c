@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 00:39:07 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 16:39:19 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:26:37 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,16 @@ void	exec_routine(t_philo *ph)
 	ft_print_status(ph, "is sleeping");
 	//ft_usleep(ph->env->t_to_sleep);
 	ft_print_status(ph, "is thinking");
+}
+
+void	destroy_mutex(t_philo *ph, int nb)
+{
+	int	i;
+
+	i = -1;
+	while (++i < nb)
+	{
+		pthread_mutex_destroy(&ph[i].fork);
+		pthread_mutex_destroy(&ph[i].mutex_write);
+	}
 }
