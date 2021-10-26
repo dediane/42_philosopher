@@ -6,7 +6,11 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2021/10/26 17:23:54 by ddecourt         ###   ########.fr       */
+=======
+/*   Updated: 2021/10/27 00:00:51 by ddecourt         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +48,15 @@ typedef struct s_philo
 }				t_philo;
 //utils
 int		ft_atoi(const char *str);
+void	init_time(t_env *env);
 long	get_timestamp(long start_time);
 void	ft_usleep(int duration);
 void	ft_print_status(t_philo *ph, char *s);
+<<<<<<< Updated upstream
 void	ft_free_my_philos(t_philo *ph, int nb);
+=======
+
+>>>>>>> Stashed changes
 //parsing
 int		ft_parsing(char **av, t_env *var);
 int		is_numeric(char **av, int i, int j);

@@ -6,7 +6,11 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 20:48:53 by ddecourt          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2021/10/26 17:26:12 by ddecourt         ###   ########.fr       */
+=======
+/*   Updated: 2021/10/26 23:59:28 by ddecourt         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +26,14 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = nb * 10 + (str[i++] - 48);
 	return (nb);
+}
+
+void	init_time(t_env *env)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	env->start_time = t.tv_sec * 1000 + t.tv_usec / 1000;
 }
 
 long int	get_timestamp(long int start_time)
