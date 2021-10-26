@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 15:26:31 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:36:53 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 		pthread_create(&ph[i].philo, NULL, &routine, &ph[i]);
 		pthread_mutex_init(&ph[i].fork, NULL);
 		pthread_mutex_init(&ph[i].mutex_write, NULL);
-		ph[i].init_time = get_timestamp(0);
+		ph[i].env = env;
 		ph[i].t_wait = 0;
 		if (i == nb - 1)
 			ph[i].next_fork = ph[0].fork;
@@ -46,8 +46,8 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 
 int	main(int ac, char **av)
 {
-	t_philo	*ph;
 	t_env	env;
+	t_philo	*ph;
 	int		nb_of_philo;
 
 	if (ft_check_ac(ac) == 1)
