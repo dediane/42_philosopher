@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 20:48:53 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 01:40:29 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:38:09 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	ft_usleep(int duration)
 
 void	ft_print_status(t_philo *ph, char *s)
 {
-	long int	time;
+	long int	time = 0;
 
-	time = get_timestamp(0);
-	if (time >= 0 && time <= 2147483647)
+	time = get_timestamp(ph->env->start_time);
+	//if (time >= 0 && time <= 2147483647)
 		printf("%ld philo %d %s\n", time, ph->id, s);
 }

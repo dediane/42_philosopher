@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 14:54:43 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:26:31 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ void	*routine(void *arg)
 	t_philo	*ph;
 
 	ph = (t_philo *)(arg);
-	pthread_mutex_lock(&ph->mutex_write);
-	printf("here\n");
-	pthread_mutex_unlock(&ph->mutex_write);
-	exec_routine(ph);
+	if (ph->id % 2 == 0)
+		exec_routine(ph);
+
 	return (0);
 }
 
@@ -36,7 +35,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 		pthread_create(&ph[i].philo, NULL, &routine, &ph[i]);
 		pthread_mutex_init(&ph[i].fork, NULL);
 		pthread_mutex_init(&ph[i].mutex_write, NULL);
-		ph[i].init_time = 0;
+		ph[i].init_time = get_timestamp(0);
 		ph[i].t_wait = 0;
 		if (i == nb - 1)
 			ph[i].next_fork = ph[0].fork;
