@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 00:39:07 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 17:26:37 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/27 00:12:03 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,16 @@ void	destroy_mutex(t_philo *ph, int nb)
 		pthread_mutex_destroy(&ph[i].fork);
 		pthread_mutex_destroy(&ph[i].mutex_write);
 	}
+}
+
+void	ft_free_my_philos(t_philo *ph, int nb)
+{
+	int	i;
+
+	i = -1;
+	while (++i < nb)
+	{
+		free(&ph[i]);
+	}
+	free(&ph);
 }

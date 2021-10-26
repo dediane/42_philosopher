@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 17:25:44 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/27 00:37:06 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,24 @@ void	*routine(void *arg)
 	t_philo	*ph;
 
 	ph = (t_philo *)(arg);
-	if (ph->id % 2 == 0)
+	//while (!is_dead(ph))
 		exec_routine(ph);
+	return (0);
+}
+
+int	is_dead(t_philo *ph)
+{
+	int i;
+	
+	i = -1;
+	while (&ph->ph[++i])
+	{
+		if (ph[i].last_meal > ph[i].env->t_to_die)
+		{
+			printf("Valeur de last meal : %ld et valeur de t_to_die : %ld\n", ph[i].last_meal, ph[i].env->t_to_die);
+			return (1);
+		}
+	}
 	return (0);
 }
 
@@ -28,14 +44,15 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 
 	i = -1;
 	env->nb_philo = nb;
+	init_time(env);
 	while (++i <= (nb - 1))
 	{
 		ph[i].id = i + 1;
-		pthread_create(&ph[i].philo, NULL, &routine, &ph[i]);
+		pthread_create(&ph[i].ph, NULL, &routine, &ph[i]);
 		pthread_mutex_init(&ph[i].fork, NULL);
 		pthread_mutex_init(&ph[i].mutex_write, NULL);
 		ph[i].env = env;
-		ph[i].t_wait = 0;
+		ph[i].last_meal = 0;
 		if (i == nb - 1)
 			ph[i].next_fork = ph[0].fork;
 		else
@@ -47,8 +64,10 @@ int	main(int ac, char **av)
 {
 	t_env	env;
 	t_philo	*ph;
+	int		i;
 	int		nb_of_philo;
 
+	i = -1;
 	if (ft_check_ac(ac) == 1)
 		return (EXIT_FAILURE);
 	if (ft_parsing(av, &env) == 1)
@@ -58,5 +77,7 @@ int	main(int ac, char **av)
 	if (!ph)
 		return (0);
 	init_my_philos(ph, &env, nb_of_philo);
+	while (i < env.nb_philo)
+		pthread_join(&ph->ph[++i], NULL);
 	printf("Parsing successful\n");
 }

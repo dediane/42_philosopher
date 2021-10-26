@@ -6,11 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2021/10/26 17:23:54 by ddecourt         ###   ########.fr       */
-=======
-/*   Updated: 2021/10/27 00:00:51 by ddecourt         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2021/10/27 00:28:40 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +33,14 @@ typedef struct s_env
 
 typedef struct s_philo
 {
-	pthread_t		philo;
+	pthread_t		ph;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	next_fork;
 	pthread_mutex_t	mutex_write;
 	t_env			*env;
 	unsigned int	id;
 	long			init_time;
-	long			t_wait;
+	long			last_meal;
 }				t_philo;
 //utils
 int		ft_atoi(const char *str);
@@ -52,7 +48,6 @@ void	init_time(t_env *env);
 long	get_timestamp(long start_time);
 void	ft_usleep(int duration);
 void	ft_print_status(t_philo *ph, char *s);
-void	ft_free_my_philos(t_philo *ph, int nb);
 //parsing
 int		ft_parsing(char **av, t_env *var);
 int		is_numeric(char **av, int i, int j);
@@ -60,5 +55,7 @@ int		ft_check_ac(int ac);
 //routine
 void	exec_routine(t_philo *ph);
 void	destroy_mutex(t_philo *ph, int nb);
+void	ft_free_my_philos(t_philo *ph, int nb);
+int		is_dead(t_philo *ph);
 
 #endif
