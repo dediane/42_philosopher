@@ -6,11 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 20:48:53 by ddecourt          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2021/10/26 17:26:12 by ddecourt         ###   ########.fr       */
-=======
-/*   Updated: 2021/10/26 23:59:28 by ddecourt         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2021/10/27 00:04:34 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -52,11 +52,7 @@ void	init_time(t_env *env);
 long	get_timestamp(long start_time);
 void	ft_usleep(int duration);
 void	ft_print_status(t_philo *ph, char *s);
-<<<<<<< Updated upstream
 void	ft_free_my_philos(t_philo *ph, int nb);
-=======
-
->>>>>>> Stashed changes
 //parsing
 int		ft_parsing(char **av, t_env *var);
 int		is_numeric(char **av, int i, int j);
