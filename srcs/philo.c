@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/27 00:37:06 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/27 13:01:47 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	*routine(void *arg)
 
 	ph = (t_philo *)(arg);
 	//while (!is_dead(ph))
-		exec_routine(ph);
+	while (ph->id %2 == 0)
+		usleep(1000);
+	
+	exec_routine(ph);
 	return (0);
 }
 
@@ -48,15 +51,20 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 	while (++i <= (nb - 1))
 	{
 		ph[i].id = i + 1;
-		pthread_create(&ph[i].ph, NULL, &routine, &ph[i]);
 		pthread_mutex_init(&ph[i].fork, NULL);
 		pthread_mutex_init(&ph[i].mutex_write, NULL);
 		ph[i].env = env;
 		ph[i].last_meal = 0;
+		ph[i].init_time = env->start_time;
+	}
+	i = -1;
+	while (++i <= (nb - 1))
+	{
 		if (i == nb - 1)
-			ph[i].next_fork = ph[0].fork;
+			ph[i].next_fork = &ph[0].fork;
 		else
-			ph[i].next_fork = ph[i + 1].fork;
+			ph[i].next_fork = &ph[i + 1].fork;
+		pthread_create(&ph[i].ph, NULL, &routine, &ph[i]);
 	}
 }
 
@@ -73,11 +81,11 @@ int	main(int ac, char **av)
 	if (ft_parsing(av, &env) == 1)
 		return (EXIT_FAILURE);
 	nb_of_philo = ft_atoi(av[1]);
-	ph = malloc(sizeof(t_philo) * (nb_of_philo + 1));
+	ph = malloc(sizeof(*ph) * (nb_of_philo + 1));
 	if (!ph)
 		return (0);
 	init_my_philos(ph, &env, nb_of_philo);
 	while (i < env.nb_philo)
 		pthread_join(&ph->ph[++i], NULL);
-	printf("Parsing successful\n");
+	//printf("Parsing successful\n");
 }

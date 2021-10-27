@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/27 00:28:40 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/27 13:00:32 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_philo
 {
 	pthread_t		ph;
 	pthread_mutex_t	fork;
-	pthread_mutex_t	next_fork;
+	pthread_mutex_t	*next_fork;
 	pthread_mutex_t	mutex_write;
 	t_env			*env;
 	unsigned int	id;
