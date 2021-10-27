@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/27 13:01:47 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/27 15:45:32 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,30 @@ void	*routine(void *arg)
 	t_philo	*ph;
 
 	ph = (t_philo *)(arg);
-	//while (!is_dead(ph))
-	while (ph->id %2 == 0)
-		usleep(1000);
-	
-	exec_routine(ph);
+	while (1)
+	{
+		while (ph->id % 2 == 0)
+		{
+			ft_usleep(100);
+			exec_routine(ph);
+		}
+		while (ph->id % 2 != 0)
+		{
+			exec_routine(ph);
+		}
+		
+	}
 	return (0);
 }
 
-int	is_dead(t_philo *ph)
+int	someone_die(t_philo *ph)
 {
 	int i;
 	
 	i = -1;
 	while (&ph->ph[++i])
 	{
+		printf("Valeur de last meal : %ld et valeur de t_to_die : %ld\n", ph[i].last_meal, ph[i].env->t_to_die);
 		if (ph[i].last_meal > ph[i].env->t_to_die)
 		{
 			printf("Valeur de last meal : %ld et valeur de t_to_die : %ld\n", ph[i].last_meal, ph[i].env->t_to_die);
@@ -87,5 +96,4 @@ int	main(int ac, char **av)
 	init_my_philos(ph, &env, nb_of_philo);
 	while (i < env.nb_philo)
 		pthread_join(&ph->ph[++i], NULL);
-	//printf("Parsing successful\n");
 }

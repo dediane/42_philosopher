@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 20:48:53 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/27 00:05:46 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:07:29 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void	ft_print_status(t_philo *ph, char *s)
 
 	time = get_timestamp(ph->env->start_time);
 	if (time >= 0 && time <= 2147483647)
-		printf("%ld philo %d %s\n", time, ph->id, s);
+		printf("%ld ms: philo %d %s\n", time, ph->id, s);
 }
