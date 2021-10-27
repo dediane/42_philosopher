@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/27 15:45:32 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/27 20:10:53 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,33 @@ void	*routine(void *arg)
 {
 	t_philo	*ph;
 
+	
 	ph = (t_philo *)(arg);
 	while (1)
 	{
+		// if (check_dead(ph) == 1)
+		// 	break;
 		while (ph->id % 2 == 0)
 		{
+			// if (check_dead(ph) == 1)
+			// 	break;
 			ft_usleep(100);
 			exec_routine(ph);
 		}
 		while (ph->id % 2 != 0)
 		{
+			// if (check_dead(ph) == 1)
+			// 	break;
 			exec_routine(ph);
 		}
-		
 	}
 	return (0);
 }
 
-int	someone_die(t_philo *ph)
+int	check_dead(t_philo *ph)
 {
-	int i;
-	
-	i = -1;
-	while (&ph->ph[++i])
-	{
-		printf("Valeur de last meal : %ld et valeur de t_to_die : %ld\n", ph[i].last_meal, ph[i].env->t_to_die);
-		if (ph[i].last_meal > ph[i].env->t_to_die)
-		{
-			printf("Valeur de last meal : %ld et valeur de t_to_die : %ld\n", ph[i].last_meal, ph[i].env->t_to_die);
-			return (1);
-		}
-	}
+	if (ph->last_meal > ph->env->t_to_die)
+		return (1);
 	return (0);
 }
 
