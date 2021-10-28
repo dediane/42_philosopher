@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/28 16:57:49 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/28 19:07:02 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 typedef struct s_env
 {
 	pthread_mutex_t	mutex_write;
-	int		nb_philo;
-	int		nb_time_eat;
-	long	start_time;
-	long	t_to_die;
-	long	t_to_eat;
-	long	t_to_sleep;
+	int				nb_philo;
+	int				nb_time_eat;
+	long			start_time;
+	long			t_to_die;
+	long			t_to_eat;
+	long			t_to_sleep;
 }				t_env;
 
 typedef struct s_philo
@@ -57,5 +57,7 @@ void	exec_routine(t_philo *ph);
 void	destroy_mutex(t_philo *ph, int nb);
 void	ft_free_my_philos(t_philo *ph, int nb);
 int		check_dead(t_philo *ph);
+//
+void	is_someone_dead(t_philo *ph);
 
 #endif

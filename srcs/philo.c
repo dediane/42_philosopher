@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/28 18:08:50 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/28 19:15:41 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ void	*routine(void *arg)
 		exec_routine(ph);
 	}
 	return (0);
+}
+
+void	is_someone_dead(t_philo *ph)
+{
+	int i;
+
+	i = -1;
+	while (1)
+	{
+		while (++i < ph->env->nb_philo)
+		{
+			if (check_dead(&ph[i]))
+				exit(1);
+		}
+		i = -1;
+	}
 }
 
 int	check_dead(t_philo *ph)
@@ -82,16 +98,6 @@ int	main(int ac, char **av)
 	if (!ph)
 		return (0);
 	init_my_philos(ph, &env, nb_of_philo);
-	i = -1;
-	while (1)
-	{
-		while (++i < ph->env->nb_philo)
-		{
-			if (check_dead(&ph[i]))
-				exit(1);
-		}
-		i = -1;
-	}
 	while (i < env.nb_philo)
 		pthread_join(&ph->ph[++i], NULL);
 }
