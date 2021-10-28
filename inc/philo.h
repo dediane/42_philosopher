@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/27 18:21:34 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/28 16:57:49 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 //struct
 typedef struct s_env
 {
+	pthread_mutex_t	mutex_write;
 	int		nb_philo;
 	int		nb_time_eat;
 	long	start_time;
@@ -33,11 +34,10 @@ typedef struct s_env
 
 typedef struct s_philo
 {
+	t_env			*env;
 	pthread_t		ph;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*next_fork;
-	pthread_mutex_t	mutex_write;
-	t_env			*env;
 	unsigned int	id;
 	long			init_time;
 	long			last_meal;

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/27 20:10:53 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:08:50 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,24 @@ void	*routine(void *arg)
 
 	
 	ph = (t_philo *)(arg);
+	if (ph->id % 2 == 0)
+		ft_usleep(100);
 	while (1)
 	{
-		// if (check_dead(ph) == 1)
-		// 	break;
-		while (ph->id % 2 == 0)
-		{
-			// if (check_dead(ph) == 1)
-			// 	break;
-			ft_usleep(100);
-			exec_routine(ph);
-		}
-		while (ph->id % 2 != 0)
-		{
-			// if (check_dead(ph) == 1)
-			// 	break;
-			exec_routine(ph);
-		}
+		exec_routine(ph);
 	}
 	return (0);
 }
 
 int	check_dead(t_philo *ph)
 {
+	pthread_mutex_lock(&ph->env->mutex_write);
 	if (ph->last_meal > ph->env->t_to_die)
+	{
+		ft_print_status(ph, "died");
 		return (1);
+	}
+	pthread_mutex_unlock(&ph->env->mutex_write);
 	return (0);
 }
 
@@ -57,7 +50,6 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 	{
 		ph[i].id = i + 1;
 		pthread_mutex_init(&ph[i].fork, NULL);
-		pthread_mutex_init(&ph[i].mutex_write, NULL);
 		ph[i].env = env;
 		ph[i].last_meal = 0;
 		ph[i].init_time = env->start_time;
@@ -90,6 +82,16 @@ int	main(int ac, char **av)
 	if (!ph)
 		return (0);
 	init_my_philos(ph, &env, nb_of_philo);
+	i = -1;
+	while (1)
+	{
+		while (++i < ph->env->nb_philo)
+		{
+			if (check_dead(&ph[i]))
+				exit(1);
+		}
+		i = -1;
+	}
 	while (i < env.nb_philo)
 		pthread_join(&ph->ph[++i], NULL);
 }

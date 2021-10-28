@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 00:39:07 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/27 19:59:31 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:10:44 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,33 @@
 void	exec_routine(t_philo *ph)
 {
 	pthread_mutex_lock(ph->next_fork);
-	pthread_mutex_lock(&ph->mutex_write);
+	pthread_mutex_lock(&ph->env->mutex_write);
 	ft_print_status(ph, "has taken a fork");
-	pthread_mutex_unlock(&ph->mutex_write);
+	pthread_mutex_unlock(&ph->env->mutex_write);
 	pthread_mutex_lock(&ph->fork);
-	pthread_mutex_lock(&ph->mutex_write);
+	pthread_mutex_lock(&ph->env->mutex_write);
 	ft_print_status(ph, "has taken a fork");
-	pthread_mutex_unlock(&ph->mutex_write);
-	pthread_mutex_lock(&ph->mutex_write);
+	pthread_mutex_unlock(&ph->env->mutex_write);
+	pthread_mutex_lock(&ph->env->mutex_write);
 	ph->last_meal= get_timestamp(ph->env->start_time);
 	ft_print_status(ph, "is eating");
 	ft_usleep(ph->env->t_to_eat);
-	//printf("Last_meal -> %ld\n", ph->last_meal);
 	//ph->env->nb_time_eat++;
-	pthread_mutex_unlock(&ph->mutex_write);
+	pthread_mutex_unlock(&ph->env->mutex_write);
 	pthread_mutex_unlock(&ph->fork);
 	pthread_mutex_unlock(ph->next_fork);
+	pthread_mutex_lock(&ph->env->mutex_write);
 	ft_print_status(ph, "is sleeping");
+	pthread_mutex_unlock(&ph->env->mutex_write);
 	ft_usleep(ph->env->t_to_sleep);
+	pthread_mutex_lock(&ph->env->mutex_write);
 	ft_print_status(ph, "is thinking");
+	pthread_mutex_unlock(&ph->env->mutex_write);
+	// if (ph->last_meal > ph->env->t_to_die)
+	// {
+	// 	ft_print_status(ph, "is died");
+	// 	exit(1);
+	// }
 }
 
 void	destroy_mutex(t_philo *ph, int nb)
@@ -44,7 +52,7 @@ void	destroy_mutex(t_philo *ph, int nb)
 	while (++i < nb)
 	{
 		pthread_mutex_destroy(&ph[i].fork);
-		pthread_mutex_destroy(&ph[i].mutex_write);
+		pthread_mutex_destroy(&ph[i].env->mutex_write);
 	}
 }
 
