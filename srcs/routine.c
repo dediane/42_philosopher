@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 00:39:07 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/28 19:09:44 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/01 20:54:33 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	exec_routine(t_philo *ph)
 	ft_print_status(ph, "has taken a fork");
 	pthread_mutex_unlock(&ph->env->mutex_write);
 	pthread_mutex_lock(&ph->env->mutex_write);
+	//pthread_mutex_lock(&ph->env->eating);
 	ph->last_meal= get_timestamp(ph->env->start_time);
+	//pthread_mutex_unlock(&ph->env->eating);
 	ft_print_status(ph, "is eating");
 	ft_usleep(ph->env->t_to_eat);
 	pthread_mutex_unlock(&ph->env->mutex_write);
