@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/28 19:15:41 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/01 22:19:01 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	is_someone_dead(t_philo *ph)
 		while (++i < ph->env->nb_philo)
 		{
 			if (check_dead(&ph[i]))
-				exit(1);
+				ph->env->is_dead = 0;
 		}
 		i = -1;
 	}
@@ -62,13 +62,12 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 	i = -1;
 	env->nb_philo = nb;
 	init_time(env);
-	while (++i <= (nb - 1))
+	while (++i < nb )
 	{
 		ph[i].id = i + 1;
 		pthread_mutex_init(&ph[i].fork, NULL);
 		ph[i].env = env;
 		ph[i].last_meal = 0;
-		ph[i].init_time = env->start_time;
 	}
 	i = -1;
 	while (++i <= (nb - 1))
@@ -93,6 +92,7 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	if (ft_parsing(av, &env) == 1)
 		return (EXIT_FAILURE);
+	env.is_dead = 0;
 	nb_of_philo = ft_atoi(av[1]);
 	ph = malloc(sizeof(*ph) * (nb_of_philo + 1));
 	if (!ph)

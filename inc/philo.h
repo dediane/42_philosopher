@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/29 21:53:52 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/01 20:59:39 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_env
 {
 	pthread_mutex_t	mutex_write;
 	pthread_mutex_t eating;
+	int				is_dead;
 	int				nb_philo;
 	int				nb_time_eat;
 	long			start_time;
