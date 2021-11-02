@@ -6,7 +6,7 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/13 23:02:52 by ddecourt          #+#    #+#              #
-#    Updated: 2021/11/02 19:48:53 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/11/03 00:10:53 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEADER = inc/philo.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -pthread -g #-fsanitize=thread
 RM = rm -f
 
 .c.o:
