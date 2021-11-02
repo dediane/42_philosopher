@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 17:31:18 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:03:51 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	pthread_t		ph;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*next_fork;
+	pthread_mutex_t philo_mutex;
 	unsigned int	id;
 	long			init_time;
 	long			last_meal;

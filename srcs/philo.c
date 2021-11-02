@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 18:48:48 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:04:25 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 	{
 		ph[i].id = i + 1;
 		pthread_mutex_init(&ph[i].fork, NULL);
+		pthread_mutex_init(&ph[i].philo_mutex, NULL);
 		ph[i].env = env;
 		ph[i].last_meal = 0;
 	}
