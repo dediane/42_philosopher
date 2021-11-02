@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/01 23:32:59 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 12:12:46 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*routine(void *arg)
 
 	
 	ph = (t_philo *)(arg);
-	if (ph->id % 2 == 0)
-		ft_usleep(100);
+	//if (ph->id % 2 == 0)
+	//	ft_usleep(10);
 	while (1)
 	{
 		exec_routine(ph);
@@ -70,7 +70,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 		ph[i].last_meal = 0;
 	}
 	i = -1;
-	while (++i <= (nb - 1))
+	while (++i < nb)
 	{
 		if (i == nb - 1)
 			ph[i].next_fork = &ph[0].fork;
@@ -94,10 +94,11 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	env.is_dead = 0;
 	nb_of_philo = ft_atoi(av[1]);
-	ph = malloc(sizeof(*ph) * (nb_of_philo + 1));
+	ph = malloc(sizeof(*ph) * (nb_of_philo));
 	if (!ph)
 		return (0);
+	init_mutex(&env);
 	init_my_philos(ph, &env, nb_of_philo);
-	while (i < env.nb_philo)
-		pthread_join(&ph->ph[++i], NULL);
+	while (++i < env.nb_philo)
+		pthread_join(&ph->ph[i], NULL);
 }
