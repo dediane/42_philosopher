@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 16:01:02 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:15:14 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	destroy_mutex(t_philo *ph, t_env *env, int nb);
 void	ft_free_my_philos(t_philo *ph, int nb);
 int		check_dead(t_philo *ph);
 //
-int	is_someone_dead(t_philo *ph);
+int		is_someone_dead(t_philo *ph);
 
 #endif

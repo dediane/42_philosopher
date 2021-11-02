@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 16:02:10 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:22:13 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	*routine(void *arg)
 {
 	t_philo	*ph;
 
-	
 	ph = (t_philo *)(arg);
 	while (1)
 	{
@@ -25,7 +24,7 @@ void	*routine(void *arg)
 	return (0);
 }
 
-int	is_someone_dead(t_philo *ph)
+/*int	is_someone_dead(t_philo *ph)
 {
 	int i;
 
@@ -43,9 +42,9 @@ int	is_someone_dead(t_philo *ph)
 		i = -1;
 	}
 	return(1);
-}
+}*/
 
-int	check_dead(t_philo *ph)
+/*int	check_dead(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->env->mutex_write);
 	if (ph->last_meal > (long)ph->env->t_to_die)
@@ -55,25 +54,7 @@ int	check_dead(t_philo *ph)
 	}
 	pthread_mutex_unlock(&ph->env->mutex_write);
 	return (0);
-}
-
-// UNE PREMIERE BOUCLE
-// BOUCLE A PART
-// {
-//		Assignation fourchette
-// }
-// init_time()
-// while(i < nb)
-//{
-//	if(i % 2 == 0)
-//			phthread_create( exec_routine)
-//		TU VAS LANCER TOUS TES PAIRS
-//}
-//            | P1 |P2| P3 
-// }
-// usleep(250)
-// if(i % 2 != 0)
- 
+}*/
 
 void	init_my_philos(t_philo *ph, t_env *env, int nb)
 {
@@ -81,7 +62,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 
 	i = -1;
 	env->nb_philo = nb;
-	while (++i < nb )
+	while (++i < nb)
 	{
 		ph[i].id = i + 1;
 		pthread_mutex_init(&ph[i].fork, NULL);
@@ -108,6 +89,30 @@ int	init_prog(int ac, char **av, t_env *env)
 	return (0);
 }
 
+int	start_my_philos(t_env *env, t_philo *ph)
+{
+	int i;
+
+	i = -1;
+	while (++i < env->nb_philo)
+	{
+		if (i % 2 == 0)
+		{
+			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
+		}
+	}
+	i = -1;
+	ft_usleep(100);
+	while (++i < env->nb_philo)
+	{
+		if (i % 2 != 0)
+		{
+			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
+		}
+	}
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_env	env;
@@ -123,19 +128,9 @@ int	main(int ac, char **av)
 		return (0);
 	init_mutex(&env);
 	init_my_philos(ph, &env, nb_of_philo);
-	while (++i < env.nb_philo)
-	{
-		if (i % 2 == 0)
-			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
-	}
-	i = -1;
-	ft_usleep(100);
-	while (++i < env.nb_philo)
-	{
-		if (i % 2 != 0)
-			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
-	}
-	i = -1;
+	if (!start_my_philos(&env, ph))
+		return (printf("Error, thread creation failed"),1);
 	while (++i < env.nb_philo)
 		pthread_join(&ph->ph[i], NULL);
+	return(0);
 }
