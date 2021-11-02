@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:13:28 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 19:05:30 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:12:06 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,15 @@ int	check_dead(t_philo *ph)
 	while (++i < ph->env->nb_philo)
 	{
 		pthread_mutex_lock(&ph->philo_mutex);
+		if (ph[i].time_he_eat == ph[i].env->nb_time_eat)
+		{
+			ph[i].env->is_dead = 1;
+			return (1);
+		}
 		if ((get_timestamp(ph[i].env->start_time) - ph[i].last_meal) > (long)ph[i].env->t_to_die)
 		{
 			ft_print_status(ph, "died");
-			ph->env->is_dead = 1;
+			ph[i].env->is_dead = 1;
 			return (1);
 		}
 		else

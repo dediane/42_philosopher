@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 19:04:25 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:10:32 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 		pthread_mutex_init(&ph[i].philo_mutex, NULL);
 		ph[i].env = env;
 		ph[i].last_meal = 0;
+		ph[i].time_he_eat = 0;
 	}
 	i = -1;
 	while (++i < nb)
