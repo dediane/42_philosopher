@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 15:43:06 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:01:02 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_env
 	int				t_to_die;
 	int				t_to_eat;
 	int				t_to_sleep;
+	int				is_dead;
 }				t_env;
 
 typedef struct s_philo
@@ -40,7 +41,6 @@ typedef struct s_philo
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*next_fork;
 	unsigned int	id;
-	int				is_dead;
 	long			init_time;
 	long			last_meal;
 }				t_philo;
@@ -61,6 +61,6 @@ void	destroy_mutex(t_philo *ph, t_env *env, int nb);
 void	ft_free_my_philos(t_philo *ph, int nb);
 int		check_dead(t_philo *ph);
 //
-void	is_someone_dead(t_philo *ph);
+int	is_someone_dead(t_philo *ph);
 
 #endif

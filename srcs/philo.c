@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 15:45:23 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:02:10 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*routine(void *arg)
 	return (0);
 }
 
-void	is_someone_dead(t_philo *ph)
+int	is_someone_dead(t_philo *ph)
 {
 	int i;
 
@@ -37,11 +37,12 @@ void	is_someone_dead(t_philo *ph)
 			if (ph[i].last_meal >= ph[i].env->t_to_die)
 			{
 				ft_print_status(&ph[i], "died");
-				ph[i].is_dead = 1;
+				return(0);
 			}
 		}
 		i = -1;
 	}
+	return(1);
 }
 
 int	check_dead(t_philo *ph)
@@ -86,7 +87,6 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 		pthread_mutex_init(&ph[i].fork, NULL);
 		ph[i].env = env;
 		ph[i].last_meal = 0;
-		ph[i].is_dead = 0;
 	}
 	i = -1;
 	while (++i < nb)
@@ -99,6 +99,15 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 	init_time(env);
 }
 
+int	init_prog(int ac, char **av, t_env *env)
+{
+	if (ft_check_ac(ac) == 1)
+		return (EXIT_FAILURE);
+	if (ft_parsing(av, env) == 1)
+		return (EXIT_FAILURE);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_env	env;
@@ -107,10 +116,7 @@ int	main(int ac, char **av)
 	int		nb_of_philo;
 
 	i = -1;
-	if (ft_check_ac(ac) == 1)
-		return (EXIT_FAILURE);
-	if (ft_parsing(av, &env) == 1)
-		return (EXIT_FAILURE);
+	init_prog(ac, av, &env);
 	nb_of_philo = ft_atoi(av[1]);
 	ph = malloc(sizeof(*ph) * (nb_of_philo));
 	if (!ph)
