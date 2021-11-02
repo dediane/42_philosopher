@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 00:39:07 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 12:10:19 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 13:08:56 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exec_routine(t_philo *ph)
 	pthread_mutex_unlock(&ph->env->mutex_write);
 	
 	//pthread_mutex_lock(&ph->env->eating);
-	ph->last_meal= get_timestamp(ph->env->start_time);
+	//ph->last_meal= get_timestamp(ph->env->start_time);
 	//pthread_mutex_unlock(&ph->env->eating);
 	
 	pthread_mutex_lock(&ph->env->mutex_write);

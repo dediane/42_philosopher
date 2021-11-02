@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 12:12:46 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 13:08:40 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*routine(void *arg)
 
 	
 	ph = (t_philo *)(arg);
-	//if (ph->id % 2 == 0)
-	//	ft_usleep(10);
+	if (ph->id % 2 == 0)
+		ft_usleep(100);
 	while (1)
 	{
 		exec_routine(ph);
@@ -76,7 +76,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 			ph[i].next_fork = &ph[0].fork;
 		else
 			ph[i].next_fork = &ph[i + 1].fork;
-		pthread_create(&ph[i].ph, NULL, &routine, &ph[i]);
+		pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
 	}
 }
 
