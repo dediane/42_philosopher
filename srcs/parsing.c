@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:51:13 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 15:25:59 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:10:27 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,14 @@ int	ft_parsing(char **av, t_env *env)
 		return (1);
 	if (av[5] != NULL)
 		env->nb_time_eat = ft_atoi(av[5]);
+	return (0);
+}
+
+int	init_prog(int ac, char **av, t_env *env)
+{
+	if (ft_check_ac(ac) == 1)
+		return (EXIT_FAILURE);
+	if (ft_parsing(av, env) == 1)
+		return (EXIT_FAILURE);
 	return (0);
 }
