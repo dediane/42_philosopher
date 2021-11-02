@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 01:09:46 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 12:10:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 15:07:06 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef struct s_env
 	int				nb_philo;
 	int				nb_time_eat;
 	long			start_time;
-	long			t_to_die;
-	long			t_to_eat;
-	long			t_to_sleep;
+	int				t_to_die;
+	int				t_to_eat;
+	int			t_to_sleep;
 }				t_env;
 
 typedef struct s_philo
@@ -50,13 +50,13 @@ void	init_time(t_env *env);
 long	get_timestamp(long start_time);
 void	ft_usleep(int duration);
 void	ft_print_status(t_philo *ph, char *s);
-void	init_mutex(t_env *env);
 //parsing
 int		ft_parsing(char **av, t_env *var);
 int		is_numeric(char **av, int i, int j);
 int		ft_check_ac(int ac);
 //routine
 void	exec_routine(t_philo *ph);
+void	init_mutex(t_env *env);
 void	destroy_mutex(t_philo *ph, t_env *env, int nb);
 void	ft_free_my_philos(t_philo *ph, int nb);
 int		check_dead(t_philo *ph);

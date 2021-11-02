@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 20:48:53 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 12:07:37 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 14:56:21 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,4 @@ void	ft_print_status(t_philo *ph, char *s)
 	time = get_timestamp(ph->env->start_time);
 	if (time >= 0 && time <= 2147483647)
 		printf("%ldms philo %d %s\n", time, ph->id, s);
-}
-
-void	init_mutex(t_env *env)
-{
-	pthread_mutex_init(&env->mutex_write, NULL);
-	pthread_mutex_init(&env->eating, NULL);
 }
