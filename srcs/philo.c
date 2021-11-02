@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 15:04:57 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 15:45:23 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void	is_someone_dead(t_philo *ph)
 	{
 		while (++i < ph->env->nb_philo)
 		{
-			if (check_dead(&ph[i]))
-				ph->env->is_dead = 0;
+			if (ph[i].last_meal >= ph[i].env->t_to_die)
+			{
+				ft_print_status(&ph[i], "died");
+				ph[i].is_dead = 1;
+			}
 		}
 		i = -1;
 	}
@@ -44,7 +47,7 @@ void	is_someone_dead(t_philo *ph)
 int	check_dead(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->env->mutex_write);
-	if (ph->last_meal > ph->env->t_to_die)
+	if (ph->last_meal > (long)ph->env->t_to_die)
 	{
 		ft_print_status(ph, "died");
 		return (1);
@@ -83,6 +86,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 		pthread_mutex_init(&ph[i].fork, NULL);
 		ph[i].env = env;
 		ph[i].last_meal = 0;
+		ph[i].is_dead = 0;
 	}
 	i = -1;
 	while (++i < nb)
@@ -93,19 +97,6 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 			ph[i].next_fork = &ph[i + 1].fork;
 	}
 	init_time(env);
-	i = -1;
-	while (++i < nb)
-	{
-		if (i % 2 == 0)
-			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
-	}
-	i = -1;
-	//ft_usleep(100);
-	while (++i < nb)
-	{
-		if (i % 2 != 0)
-			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
-	}
 }
 
 int	main(int ac, char **av)
@@ -120,19 +111,25 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	if (ft_parsing(av, &env) == 1)
 		return (EXIT_FAILURE);
-
-
-	env.is_dead = 0;
-
-
 	nb_of_philo = ft_atoi(av[1]);
 	ph = malloc(sizeof(*ph) * (nb_of_philo));
 	if (!ph)
 		return (0);
-
-
 	init_mutex(&env);
 	init_my_philos(ph, &env, nb_of_philo);
+	while (++i < env.nb_philo)
+	{
+		if (i % 2 == 0)
+			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
+	}
+	i = -1;
+	ft_usleep(100);
+	while (++i < env.nb_philo)
+	{
+		if (i % 2 != 0)
+			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
+	}
+	i = -1;
 	while (++i < env.nb_philo)
 		pthread_join(&ph->ph[i], NULL);
 }
