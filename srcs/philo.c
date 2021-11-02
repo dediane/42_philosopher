@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/02 19:28:09 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:48:26 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	*routine(void *arg)
 
 	ph = (t_philo *)(arg);
 	env = ph->env;
-	while (env->is_dead == 0)
+	//while (env->is_dead == 0)
+	while (1)
 	{
 			exec_routine(ph);
 	}
