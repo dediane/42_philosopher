@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/03 15:32:17 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:35:04 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ int	main(int ac, char **av)
 	while (++i < env.nb_philo)
 		pthread_join(ph[i].ph, NULL);
 	destroy_mutex(ph, &env, nb_of_philo);
-	ft_free_my_philos(ph, nb_of_philo);
+	//ft_free_my_philos(ph, nb_of_philo);
 	return (0);
 }
