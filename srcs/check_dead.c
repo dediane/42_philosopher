@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:13:28 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/03 01:17:03 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/03 11:40:52 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_dead(t_philo *ph)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = 0;
@@ -31,7 +31,8 @@ int	check_dead(t_philo *ph)
 				return (1);
 			}
 		}
-		if ((get_timestamp(ph[i].env->start_time) - ph[i].last_meal) > (long)ph[i].env->t_to_die)
+		if ((get_timestamp(ph[i].env->start_time) - ph[i].last_meal) > \
+		(long)ph[i].env->t_to_die)
 		{
 			ft_print_status(ph, "died");
 			ph[i].env->is_dead = 1;

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/03 01:38:29 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/03 11:48:14 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 void	*routine(void *arg)
 {
 	t_philo	*ph;
-	t_env	*env;
 
 	ph = (t_philo *)(arg);
-	env = ph->env;
 	//pthread_mutex_lock(&env->mutex_write);
-	//while (env->is_dead == 0)
+	//while (ph->env->is_dead == 0)
 	while (1)
 	{
 		exec_routine(ph);
