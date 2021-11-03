@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:13:28 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/03 00:25:04 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/03 01:17:03 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_dead(t_philo *ph)
 	j = 0;
 	while (++i < ph->env->nb_philo)
 	{
-		pthread_mutex_lock(&ph->philo_mutex);
+		pthread_mutex_lock(&ph[i].env->eating);
 		if (ph[i].time_he_eat == ph[i].env->nb_time_eat)
 		{
 			j++;
@@ -38,8 +38,12 @@ int	check_dead(t_philo *ph)
 			return (1);
 		}
 		else
+		{
+			pthread_mutex_lock(&ph[i].philo_mutex);
 			ph->env->is_dead = 0;
-		pthread_mutex_unlock(&ph->philo_mutex);
+			pthread_mutex_unlock(&ph[i].philo_mutex);
+		}
+		pthread_mutex_unlock(&ph[i].env->eating);
 	}
 	return (0);
 }
