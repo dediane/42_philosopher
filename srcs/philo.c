@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/03 14:52:10 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:26:09 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*routine(void *arg)
 	while (1)
 	{
 		exec_routine(ph);
-		//pthread_mutex_unlock(&env->mutex_write);	
+		//pthread_mutex_unlock(&env->mutex_write);
 	}
 	return (0);
 }

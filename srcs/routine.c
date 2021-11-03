@@ -6,13 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 00:39:07 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/03 11:47:46 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:26:34 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void exec_routine(t_philo *ph)
+void	exec_routine(t_philo *ph)
 {
 	pthread_mutex_lock(&ph->fork);
 	ft_print_status(ph, "has taken a fork");
@@ -31,9 +31,9 @@ void exec_routine(t_philo *ph)
 	ft_print_status(ph, "is thinking");
 }
 
-void destroy_mutex(t_philo *ph, t_env *env, int nb)
+void	destroy_mutex(t_philo *ph, t_env *env, int nb)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < nb)
@@ -44,9 +44,9 @@ void destroy_mutex(t_philo *ph, t_env *env, int nb)
 	pthread_mutex_destroy(&env->eating);
 }
 
-void ft_free_my_philos(t_philo *ph, int nb)
+void	ft_free_my_philos(t_philo *ph, int nb)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < nb)
@@ -56,7 +56,7 @@ void ft_free_my_philos(t_philo *ph, int nb)
 	free(&ph);
 }
 
-void init_mutex(t_env *env)
+void	init_mutex(t_env *env)
 {
 	pthread_mutex_init(&env->mutex_write, NULL);
 	pthread_mutex_init(&env->eating, NULL);
