@@ -14,13 +14,6 @@
 
 void	exec_routine(t_philo *ph)
 {
-	int	is_dead;
-
-	pthread_mutex_lock(&ph->env->death_mutex);
-	is_dead = ph->env->is_dead;
-	pthread_mutex_unlock(&ph->env->death_mutex);
-	while (is_dead == 0)
-	{
 		write(1, "$\n", 2);
 		pthread_mutex_lock(&ph->fork);
 		ft_print_status(ph, "has taken a fork");
@@ -38,8 +31,6 @@ void	exec_routine(t_philo *ph)
 		ft_usleep(ph->env->t_to_sleep);
 		ft_print_status(ph, "is thinking");
 		write(1, "#\n", 2);
-		
-	}
 }
 
 void	destroy_mutex(t_philo *ph, t_env *env, int nb)

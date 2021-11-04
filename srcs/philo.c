@@ -94,9 +94,9 @@ int	main(int ac, char **av)
 	env.is_dead = 0;
 	init_mutex(&env);
 	init_my_philos(ph, &env, nb_of_philo);
-	if (start_my_philos(&env, ph) == 1)
-	{destroy_mutex(ph, &env, nb_of_philo);
-	free(ph);}
+	start_my_philos(&env, ph);
+	destroy_mutex(ph, &env, nb_of_philo);
+	free(ph);
 	while (++i < env.nb_philo)
 		pthread_join(ph[i].ph, NULL);
 	return (0);
