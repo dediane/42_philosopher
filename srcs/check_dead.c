@@ -29,7 +29,6 @@ int	check_dead(t_philo *ph)
 			if (j == ph->env->nb_philo)
 			{
 				ph[i].env->is_dead = 1;
-
 				pthread_mutex_unlock(&ph[i].env->eating);
 				pthread_mutex_unlock(&ph[i].env->death_mutex);
 				return (1);
