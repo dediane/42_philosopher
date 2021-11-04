@@ -47,6 +47,7 @@ int	ft_parsing(char **av, t_env *env)
 	env->t_to_die = ft_atoi(av[2]);
 	env->t_to_eat = ft_atoi(av[3]);
 	env->t_to_sleep = ft_atoi(av[4]);
+	env->stop = 0;
 	pthread_mutex_init(&env->mutex_write, NULL);
 	pthread_mutex_init(&env->death_mutex, NULL);
 	pthread_mutex_init(&env->eating, NULL);

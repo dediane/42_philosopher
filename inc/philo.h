@@ -33,6 +33,7 @@ typedef struct s_env
 	int				t_to_eat;
 	int				t_to_sleep;
 	int				is_dead;
+	int				stop;
 }				t_env;
 
 typedef struct s_philo

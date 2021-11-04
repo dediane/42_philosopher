@@ -54,6 +54,7 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 int	start_my_philos(t_env *env, t_philo *ph)
 {
 	int	i;
+	int	dead;
 
 	i = -1;
 	while (++i < env->nb_philo)
@@ -69,8 +70,12 @@ int	start_my_philos(t_env *env, t_philo *ph)
 			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
 	}
 	while (ph->env->is_dead == 0)
-		check_dead(ph);
-	return (1);
+	{
+		dead = check_dead(ph);
+		if (dead == 1)
+			return (1);
+	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -89,10 +94,10 @@ int	main(int ac, char **av)
 	env.is_dead = 0;
 	init_mutex(&env);
 	init_my_philos(ph, &env, nb_of_philo);
-	start_my_philos(&env, ph);
+	if (start_my_philos(&env, ph) == 1)
+	{destroy_mutex(ph, &env, nb_of_philo);
+	free(ph);}
 	while (++i < env.nb_philo)
 		pthread_join(ph[i].ph, NULL);
-	destroy_mutex(ph, &env, nb_of_philo);
-	free(ph);
 	return (0);
 }

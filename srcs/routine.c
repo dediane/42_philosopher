@@ -21,6 +21,7 @@ void	exec_routine(t_philo *ph)
 	pthread_mutex_unlock(&ph->env->death_mutex);
 	while (is_dead == 0)
 	{
+		write(1, "$\n", 2);
 		pthread_mutex_lock(&ph->fork);
 		ft_print_status(ph, "has taken a fork");
 		pthread_mutex_lock(ph->next_fork);
@@ -36,6 +37,8 @@ void	exec_routine(t_philo *ph)
 		ft_print_status(ph, "is sleeping");
 		ft_usleep(ph->env->t_to_sleep);
 		ft_print_status(ph, "is thinking");
+		write(1, "#\n", 2);
+		
 	}
 }
 
