@@ -25,6 +25,7 @@ typedef struct s_env
 {
 	pthread_mutex_t	mutex_write;
 	pthread_mutex_t	eating;
+	pthread_mutex_t	death_mutex;
 	int				nb_philo;
 	int				nb_time_eat;
 	long			start_time;
@@ -40,7 +41,6 @@ typedef struct s_philo
 	pthread_t		ph;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*next_fork;
-	pthread_mutex_t	philo_mutex;
 	unsigned int	id;
 	long			init_time;
 	long			last_meal;

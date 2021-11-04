@@ -58,6 +58,10 @@ void	ft_print_status(t_philo *ph, char *s)
 {
 	long int	time;
 
+	pthread_mutex_lock(&ph->env->death_mutex);
+	if(ph->env->is_dead == 1)
+		return;
+	pthread_mutex_unlock(&ph->env->death_mutex);
 	time = get_timestamp(ph->env->start_time);
 	if (time >= 0 && time <= 2147483647)
 		printf("%ldms philo %d %s\n", time, ph->id, s);

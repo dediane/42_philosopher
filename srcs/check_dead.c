@@ -25,24 +25,28 @@ int	check_dead(t_philo *ph)
 		if (ph[i].time_he_eat == ph[i].env->nb_time_eat)
 		{
 			j++;
+			pthread_mutex_lock(&ph[i].env->death_mutex);
 			if (j == ph->env->nb_philo)
 			{
 				ph[i].env->is_dead = 1;
 				return (1);
 			}
+			pthread_mutex_unlock(&ph[i].env->death_mutex);
 		}
 		if ((get_timestamp(ph[i].env->start_time) - ph[i].last_meal) > \
 		(long)ph[i].env->t_to_die)
 		{
 			ft_print_status(ph, "died");
+			pthread_mutex_lock(&ph[i].env->death_mutex);
 			ph[i].env->is_dead = 1;
+			pthread_mutex_unlock(&ph[i].env->death_mutex);
 			return (1);
 		}
 		else
 		{
-			pthread_mutex_lock(&ph[i].philo_mutex);
+			pthread_mutex_lock(&ph[i].env->death_mutex);
 			ph->env->is_dead = 0;
-			pthread_mutex_unlock(&ph[i].philo_mutex);
+			pthread_mutex_unlock(&ph[i].env->death_mutex);
 		}
 		pthread_mutex_unlock(&ph[i].env->eating);
 	}

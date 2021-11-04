@@ -15,15 +15,15 @@
 void	*routine(void *arg)
 {
 	t_philo	*ph;
+	int is_dead;
 
 	ph = (t_philo *)(arg);
-	//pthread_mutex_lock(&env->mutex_write);
+	pthread_mutex_lock(&ph->env->death_mutex);
+	is_dead = ph->env->is_dead;
+	pthread_mutex_unlock(&ph->env->death_mutex);
 	//while (ph->env->is_dead != 1)
-	while (1)
-	{
+	while (is_dead == 0)
 		exec_routine(ph);
-		//pthread_mutex_unlock(&env->mutex_write);
-	}
 	return (0);
 }
 
@@ -37,7 +37,6 @@ void	init_my_philos(t_philo *ph, t_env *env, int nb)
 	{
 		ph[i].id = i + 1;
 		pthread_mutex_init(&ph[i].fork, NULL);
-		pthread_mutex_init(&ph[i].philo_mutex, NULL);
 		ph[i].env = env;
 		ph[i].last_meal = 0;
 		ph[i].time_he_eat = 0;
@@ -71,9 +70,10 @@ int	start_my_philos(t_env *env, t_philo *ph)
 			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
 	}
 	while (ph->env->is_dead == 0)
+	{
 		check_dead(ph);
+	}
 	//destroy_mutex(ph, env, env->nb_philo);
-	exit(0);
 	return (1);
 }
 
@@ -97,6 +97,7 @@ int	main(int ac, char **av)
 	while (++i < env.nb_philo)
 		pthread_join(ph[i].ph, NULL);
 	destroy_mutex(ph, &env, nb_of_philo);
-	//ft_free_my_philos(ph, nb_of_philo);
+	printf("Hello");
+	free(ph);
 	return (0);
 }
