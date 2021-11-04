@@ -15,13 +15,12 @@
 void	*routine(void *arg)
 {
 	t_philo	*ph;
-	int	is_dead;
+	int		is_dead;
 
 	ph = (t_philo *)(arg);
 	pthread_mutex_lock(&ph->env->death_mutex);
 	is_dead = ph->env->is_dead;
 	pthread_mutex_unlock(&ph->env->death_mutex);
-	//while (ph->env->is_dead != 1)
 	while (is_dead == 0)
 		exec_routine(ph);
 	return (0);
@@ -29,7 +28,7 @@ void	*routine(void *arg)
 
 void	init_my_philos(t_philo *ph, t_env *env, int nb)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	env->nb_philo = nb;
@@ -70,10 +69,7 @@ int	start_my_philos(t_env *env, t_philo *ph)
 			pthread_create(&ph[i].ph, NULL, routine, &ph[i]);
 	}
 	while (ph->env->is_dead == 0)
-	{
 		check_dead(ph);
-	}
-	//destroy_mutex(ph, env, env->nb_philo);
 	return (1);
 }
 
@@ -97,7 +93,6 @@ int	main(int ac, char **av)
 	while (++i < env.nb_philo)
 		pthread_join(ph[i].ph, NULL);
 	destroy_mutex(ph, &env, nb_of_philo);
-	printf("Hello");
 	free(ph);
 	return (0);
 }

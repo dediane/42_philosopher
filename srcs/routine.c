@@ -14,7 +14,7 @@
 
 void	exec_routine(t_philo *ph)
 {
-	int is_dead;
+	int	is_dead;
 
 	pthread_mutex_lock(&ph->env->death_mutex);
 	is_dead = ph->env->is_dead;
