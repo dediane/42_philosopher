@@ -15,7 +15,7 @@
 void	*routine(void *arg)
 {
 	t_philo	*ph;
-	int is_dead;
+	int	is_dead;
 
 	ph = (t_philo *)(arg);
 	pthread_mutex_lock(&ph->env->death_mutex);
