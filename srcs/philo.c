@@ -29,7 +29,7 @@ void	*routine(void *arg)
 
 void	init_my_philos(t_philo *ph, t_env *env, int nb)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	env->nb_philo = nb;
