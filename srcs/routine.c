@@ -44,20 +44,9 @@ void	destroy_mutex(t_philo *ph, t_env *env, int nb)
 	pthread_mutex_destroy(&env->eating);
 }
 
-void	ft_free_my_philos(t_philo *ph, int nb)
-{
-	int	i;
-
-	i = -1;
-	while (++i < nb)
-	{
-		free(&ph[i]);
-	}
-	free(&ph);
-}
-
 void	init_mutex(t_env *env)
 {
 	pthread_mutex_init(&env->mutex_write, NULL);
 	pthread_mutex_init(&env->eating, NULL);
+	pthread_mutex_init(&env->death_mutex, NULL);
 }

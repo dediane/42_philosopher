@@ -62,8 +62,10 @@ int		init_prog(int ac, char **av, t_env *env);
 void	exec_routine(t_philo *ph);
 void	init_mutex(t_env *env);
 void	destroy_mutex(t_philo *ph, t_env *env, int nb);
-void	ft_free_my_philos(t_philo *ph, int nb);
 //check dead
 int		check_dead(t_philo *ph);
+void	check_dead3(t_philo *ph);
+void	check_dead2(t_philo *ph);
+void	eating_enough_time(t_philo *ph);
 
 #endif
