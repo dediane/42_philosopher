@@ -83,31 +83,33 @@ int	start_my_philos(t_env *env, t_philo *ph)
 	return (0);
 }
 
+void	one_philo(t_philo *ph, t_env *env)
+{
+	ft_print_status(ph, "is taking a fork");
+	ft_usleep(env->t_to_die);
+	ft_print_status(ph, "is dead");
+}
+
 int	main(int ac, char **av)
 {
 	t_env	env;
 	t_philo	*ph;
 	int		i;
-	int		nb_of_philo;
 
 	i = -1;
 	init_prog(ac, av, &env);
-	nb_of_philo = ft_atoi(av[1]);
-	ph = malloc(sizeof(*ph) * (nb_of_philo));
+	env.nb_philo = ft_atoi(av[1]);
+	ph = malloc(sizeof(*ph) * (env.nb_philo));
 	if (!ph)
 		return (0);
 	env.is_dead = 0;
 	init_mutex(&env);
-	init_my_philos(ph, &env, nb_of_philo);
-	if (nb_of_philo == 1)
-	{
-		ft_print_status(ph, "is taking a fork");
-		ft_usleep(env.t_to_die);
-		ft_print_status(ph, "is dead");
-	}
+	init_my_philos(ph, &env, env.nb_philo);
+	if (env.nb_philo == 1)
+		one_philo(ph, &env);
 	else
 		start_my_philos(&env, ph);
-	destroy_mutex(ph, &env, nb_of_philo);
+	destroy_mutex(ph, &env, env.nb_philo);
 	while (++i < env.nb_philo)
 		pthread_join(ph[i].ph, NULL);
 	free(ph);
