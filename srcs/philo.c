@@ -99,7 +99,14 @@ int	main(int ac, char **av)
 	env.is_dead = 0;
 	init_mutex(&env);
 	init_my_philos(ph, &env, nb_of_philo);
-	start_my_philos(&env, ph);
+	if (nb_of_philo == 1)
+	{
+		ft_print_status(ph, "is taking a fork");
+		ft_usleep(env.t_to_die);
+		ft_print_status(ph, "is dead");
+	}
+	else
+		start_my_philos(&env, ph);
 	destroy_mutex(ph, &env, nb_of_philo);
 	while (++i < env.nb_philo)
 		pthread_join(ph[i].ph, NULL);
