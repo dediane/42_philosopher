@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:12:23 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/03 15:35:04 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/12 20:18:17 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	main(int ac, char **av)
 
 	i = -1;
 	init_prog(ac, av, &env);
+	if (env.nb_time_eat == 0)
+		return(1);
 	env.nb_philo = ft_atoi(av[1]);
 	ph = malloc(sizeof(*ph) * (env.nb_philo));
 	if (!ph)
